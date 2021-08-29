@@ -1,226 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
+		<title>Car Price Prediction</title>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Price Prediction</title>
-    
-</head>
+	<body>
+		<div class="px-5 w-100">
+			<h2 class="text-center my-4 font-weight-bold">Care Price Prediction</h2>
+			<form action="{{ url_for('predict')}}" method="post">
+				<div class="row g-3 mx-0 border rounded p-4 bg-form">
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="year" title="Year of car buy"
+							>Year of car buy</label
+						>
+						<input type="number" class="form-control" id="year" name="year" />
+					</div>
 
-<body>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="km_driven" title="How Many Kilometers Drived?"
+							>How Many Kilometers Drived?</label
+						>
+						<input
+							type="number"
+							class="form-control"
+							id="km_driven"
+							name="km_driven"
+							required="required"
+						/>
+					</div>
 
-    <div style="color:blue">
-        <form action="{{ url_for('predict')}}" method="post">
-            <h2>Predictive analysis</h2>
-            
-            <h3>Year</h3>
-            <input id="first" name="year" type="number ">
-            
-            <h3>How Many Kilometers Drived?</h3>
-            <input id="third" name="km_driven" required="required">
-            
-            <h3>Mileage</h3><br>
-            <input id="second" name="mileage" required="required">
-            
-            <h3>Engine</h3><br>
-            <input id="engine" name="engine" required="required">
-            
-            <h3>max_power</h3><br>
-            <input id="max_power" name="max_power" required="required">
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="mileage" title="What is Mileage?"
+							>What is Mileage?</label
+						>
+						<input
+							type="number"
+							step="0.01"
+							class="form-control"
+							id="mileage"
+							name="mileage"
+							required="required"
+						/>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="engine" title="what is cc in Engine?"
+							>what is cc in Engine?</label
+						>
+						<input
+							type="number"
+							class="form-control"
+							id="engine"
+							name="engine"
+							required="required"
+						/>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="max_power" title="what max power(bhp)?"
+							>what max power(bhp)?</label
+						>
+						<input
+							type="number"
+							step="0.01"
+							class="form-control"
+							id="max_power"
+							name="max_power"
+							required="required"
+						/>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="fuel_type" title="What Is the Fuel type?"
+							>What Is the Fuel type?</label
+						>
+						<select class="form-control" name="fuel_type" id="fuel" required="required">
+							<option value="fuel_Petrol">Petrol</option>
+							<option value="fuel_Diesel">Diesel</option>
+							<option value="fuel_CNG">CNG</option>
+							<option value="fuel_LPG">LPG</option>
+						</select>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label
+							class="wrap-text"
+							for="owner"
+							title="How much owners previously had the car?"
+							>How much owners previously had the car?</label
+						>
+						<select class="form-control" name="owner" id="owner" required="required">
+							<option value="owner_First">First Owner</option>
+							<option value="owner_Second">Second Owner</option>
+							<option value="owner_Third">Third Owner</option>
+							<option value="owner_Test">Test Drive Car</option>
+							<option value="owner_FourthPlus">Fourth & Above Owner</option>
+						</select>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="seats" title="How many seats your car have?"
+							>How many seats your car have?</label
+						>
+						<select class="form-control" name="seats" id="seats" required="required">
+							<option value="seats_4">4</option>
+							<option value="seats_5">5</option>
+							<option value="seats_6">6</option>
+							<option value="seats_7">7</option>
+							<option value="seats_8">8</option>
+							<option value="seats_9">9</option>
+							<option value="seats_10">10</option>
+							<option value="seats_14">14</option>
+						</select>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label
+							class="wrap-text"
+							for="seller_type"
+							title="Are you A Dealer or Individual"
+							>Are you A Dealer or Individual</label
+						>
+						<select
+							class="form-control"
+							name="seller_type"
+							id="seller_type"
+							required="required"
+						>
+							<option value="seller_type_Dealer">Dealer</option>
+							<option value="seller_type_Individual">Individual</option>
+							<option value="seller_type_Trustmark">Trustmark Dealer</option>
+						</select>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="transmission" title="Transmission type"
+							>Transmission type</label
+						>
+						<select
+							class="form-control"
+							name="transmission"
+							id="transmission"
+							required="required"
+						>
+							<option value="transmission_Manual">Manual Car</option>
+							<option value="transmission_Automatic">Automatic Car</option>
+						</select>
+					</div>
+					<div class="form-group form-floating col-lg-3 col-md-4 col-sm-6 col-12">
+						<label class="wrap-text" for="company" title="From which company?"
+							>From which company?</label
+						>
+						<select
+							class="form-control"
+							name="company"
+							id="company"
+							required="required"
+						>
+							<option value="company_Ambassador">Ambassador</option>
+							<option value="company_Ashok">Ashok</option>
+							<option value="company_Audi">Audi</option>
+							<option value="company_BMW">BMW</option>
+							<option value="company_Chevrolet">Chevrolet</option>
+							<option value="company_Daewoo">Daewoo</option>
+							<option value="company_Datsun">Datsun</option>
+							<option value="company_Fiat">Fiat</option>
+							<option value="company_Force">Force</option>
+							<option value="company_Ford">Ford</option>
+							<option value="company_Honda">Honda</option>
+							<option value="company_Hyundai">Hyundai</option>
+							<option value="company_Isuzu">Isuzu</option>
+							<option value="company_Jaguar">Jaguar</option>
+							<option value="company_Jeep">Jeep</option>
+							<option value="company_Kia">Kia</option>
+							<option value="company_Land">Land</option>
+							<option value="company_Lexus">Lexus</option>
+							<option value="company_MG">MG</option>
+							<option value="company_Mahindra">Mahindra</option>
+							<option value="company_Maruti">Maruti</option>
+							<option value="company_Mercedes_Benz">Mercedes-Benz</option>
+							<option value="company_Mitsubishi">Mitsubishi</option>
+							<option value="company_Nissan">Nissan</option>
+							<option value="company_Opel">Opel</option>
+							<option value="company_Renault">Renault</option>
+							<option value="company_Skoda">Skoda</option>
+							<option value="company_Tata">Tata</option>
+							<option value="company_Toyota">Toyota</option>
+							<option value="company_Volkswagen">Volkswagen</option>
+							<option value="company_Volvo">Volvo</option>
+						</select>
+					</div>
+					<div class="col-12 text-center my-3">
+						<button
+							type="submit"
+							class="btn btn-primary btn-lg w-25 bg-gradient font-weight-bold"
+							id="sub"
+						>
+							Predict
+						</button>
+					</div>
+				</div>
+			</form>
+			<div class="row mt-4 mx-0 border rounded p-2 result-gradient-bg">
+				<h2 class="col-12 text-center">{{ prediction_text }}</h2>
+			</div>
+		</div>
+		<style>
+			body {
+				font-family: 'Comic Sans MS', 'Helvetica Neue', Arial, sans-serif,
+					'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Verdana', 'Georgia',
+					'Roboto' !important;
+				font-size: 16px;
+			}
+			.bg-form {
+				background: linear-gradient(145deg, #e6e6e6, #ffffff);
+				box-shadow: -1px 1px 14px 1px #d9d9d9, -20px -20px 60px #ffffff;
+			}
+			select,
+			input {
+				box-shadow: -1px 1px 14px 1px #d9d9d9, -20px -20px 60px #ffffff;
+			}
+			.wrap-text {
+				width: 100%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				cursor: pointer;
+			}
+			.bg-gradient {
+				background: rgb(24, 94, 152);
+				background: radial-gradient(
+					circle,
+					rgba(24, 94, 152, 1) 0%,
+					rgba(172, 70, 252, 1) 100%
+				);
+				border: none;
+			}
+			.result-gradient-bg {
+				background: rgb(34, 193, 195);
+				background: linear-gradient(
+					318deg,
+					rgba(34, 193, 195, 1) 0%,
+					rgba(79, 253, 45, 1) 100%
+				);
+				color: #fff;
+				font-weight: bold;
+			}
+		</style>
 
-            <h3>What Is the Fuel type?</h3><br>
-            <select name="fuel_type" id="fuel" required="required">
-                <option value="fuel_Petrol">Petrol</option>
-                <option value="fuel_Diesel">Diesel</option>
-                <option value="fuel_CNG">CNG</option>
-                <option value="fuel_LPG">LPG</option>
-            </select>
-            
-            <h3>How much owners previously had the car?</h3><br>
-            <select name="owner" id="owner" required="required">
-                <option value="owner_First">First Owner</option>
-                <option value="owner_Second">Second Owner</option>
-                <option value="owner_Third">Third Owner</option>
-                <option value="owner_Test">Test Drive Car</option>
-                <option value="owner_FourthPlus">Fourth & Above Owner</option>
-            </select>
-
-            <h3>How many seats your tum-tum have?</h3><br>
-            <select name="seats" id="seats" required="required">
-                <option value="seats_4">4</option>
-                <option value="seats_5">5</option>
-                <option value="seats_6">6</option>
-                <option value="seats_7">7</option>
-                <option value="seats_8">8</option>
-                <option value="seats_9">9</option>
-                <option value="seats_10">10</option>
-                <option value="seats_14">14</option>
-            </select>
-
-            <h3>Are you A Dealer or Individual</h3><br>
-            <select name="seller_type" id="seller_type" required="required">
-                <option value="seller_type_Dealer">Dealer</option>
-                <option value="seller_type_Individual">Individual</option>
-                <option value="seller_type_Trustmark">Trustmark Dealer</option>
-            </select>
-
-            <h3>Transmission type</h3><br>
-            <select name="transmission" id="transmission" required="required">
-                <option value="transmission_Manual">Manual Car</option>
-                <option value="transmission_Automatic">Automatic Car</option>
-            </select>
-
-            <h3>From which company?</h3><br>
-            <select name="company" id="company" required="required">
-                <option value="company_Ambassador">Ambassador</option>
-                <option value="company_Ashok">Ashok</option>
-                <option value="company_Audi">Audi</option>
-                <option value="company_BMW">BMW</option>
-                <option value="company_Chevrolet">Chevrolet</option>
-                <option value="company_Daewoo">Daewoo</option>
-                <option value="company_Datsun">Datsun</option>
-                <option value="company_Fiat">Fiat</option>
-                <option value="company_Force">Force</option>
-                <option value="company_Ford">Ford</option>
-                <option value="company_Honda">Honda</option>
-                <option value="company_Hyundai">Hyundai</option>
-                <option value="company_Isuzu">Isuzu</option>
-                <option value="company_Jaguar">Jaguar</option>
-                <option value="company_Jeep">Jeep</option>
-                <option value="company_Kia">Kia</option>
-                <option value="company_Land">Land</option>
-                <option value="company_Lexus">Lexus</option>
-                <option value="company_MG">MG</option>
-                <option value="company_Mahindra">Mahindra</option>
-                <option value="company_Maruti">Maruti</option>
-                <option value="company_Mercedes_Benz">Mercedes-Benz</option>
-                <option value="company_Mitsubishi">Mitsubishi</option>
-                <option value="company_Nissan">Nissan</option>
-                <option value="company_Opel">Opel</option>
-                <option value="company_Renault">Renault</option>
-                <option value="company_Skoda">Skoda</option>
-                <option value="company_Tata">Tata</option>
-                <option value="company_Toyota">Toyota</option>
-                <option value="company_Volkswagen">Volkswagen</option>
-                <option value="company_Volvo">Volvo</option>
-            </select>
-
-            <br><br><button id="sub" type="submit ">Predict</button>
-            <br>
-
-        </form>
-        <br><br><h3>{{ prediction_text }}<h3>
-    </div>
-
-    <style>
-        body {
-            background-color: lightslategray;
-            text-align: center;
-            padding: 0px;
-        }
-        
-        #research {
-            font-size: 18px;
-            width: 100px;
-            height: 23px;
-            top: 23px;
-        }
-        
-        #box {
-            border-radius: 60px;
-            border-color: 45px;
-            border-style: solid;
-            font-family: cursive;
-            text-align: center;
-            background-color: rgb(168, 131, 61);
-            font-size: medium;
-            position: absolute;
-            width: 700px;
-            bottom: 9%;
-            height: 850px;
-            right: 30%;
-            padding: 0px;
-            margin: 0px;
-            font-size: 14px;
-        }
-        
-        #fuel {
-            width: 83px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 20px;
-        }
-        
-        #fuel:hover {
-            background-color: coral;
-        }
-        
-        #research {
-            width: 99px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #research:hover {
-            background-color: coral;
-        }
-        
-        #resea {
-            width: 99px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #resea:hover {
-            background-color: coral;
-        }
-        
-        #sub {
-            width: 120px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #sub:hover {
-            background-color: darkcyan;
-        }
-        
-        #first {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #second {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #third {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #fourth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-    </style>
-</body>
-
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script
+			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+			integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
