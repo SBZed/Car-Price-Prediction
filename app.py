@@ -21,7 +21,6 @@ def predict():
         age = 2021 - int(request.form['year'])
 
         km_driven=int(request.form['km_driven'])
-        km_driven=np.log(km_driven)
         
         mileage=float(request.form['mileage'])
         
