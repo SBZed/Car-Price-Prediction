@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div style="color:blue">
+        <form action="{{ url_for('predict')}}" method="post">
+            <h2>Predictive analysis</h2>
+            
+            <h3>Year</h3>
+            <input id="first" name="year" type="number ">
+            
+            <h3>How Many Kilometers Drived?</h3>
+            <input id="third" name="km_driven" required="required">
+            
+            <h3>Mileage</h3><br>
+            <input id="second" name="mileage" required="required">
+            
+            <h3>Engine</h3><br>
+            <input id="engine" name="engine" required="required">
+            
+            <h3>max_power</h3><br>
+            <input id="max_power" name="max_power" required="required">
+
+            <h3>What Is the Fuel type?</h3><br>
+            <select name="fuel_type" id="fuel" required="required">
+                <option value="fuel_Petrol">Petrol</option>
+                <option value="fuel_Diesel">Diesel</option>
+                <option value="fuel_CNG">CNG</option>
+                <option value="fuel_LPG">LPG</option>
+            </select>
+            
+            <h3>How much owners previously had the car?</h3><br>
+            <select name="owner" id="owner" required="required">
+                <option value="owner_First">First Owner</option>
+                <option value="owner_Second">Second Owner</option>
+                <option value="owner_Third">Third Owner</option>
+                <option value="owner_Test">Test Drive Car</option>
+                <option value="owner_FourthPlus">Fourth & Above Owner</option>
+            </select>
+
+            <h3>How many seats your tum-tum have?</h3><br>
+            <select name="seats" id="seats" required="required">
+                <option value="seats_4">4</option>
+                <option value="seats_5">5</option>
+                <option value="seats_6">6</option>
+                <option value="seats_7">7</option>
+                <option value="seats_8">8</option>
+                <option value="seats_9">9</option>
+                <option value="seats_10">10</option>
+                <option value="seats_14">14</option>
+            </select>
+
+            <h3>Are you A Dealer or Individual</h3><br>
+            <select name="seller_type" id="seller_type" required="required">
+                <option value="seller_type_Dealer">Dealer</option>
+                <option value="seller_type_Individual">Individual</option>
+                <option value="seller_type_Trustmark">Trustmark Dealer</option>
+            </select>
+
+            <h3>Transmission type</h3><br>
+            <select name="transmission" id="transmission" required="required">
+                <option value="transmission_Manual">Manual Car</option>
+                <option value="transmission_Automatic">Automatic Car</option>
+            </select>
+
+            <h3>From which company?</h3><br>
+            <select name="company" id="company" required="required">
+                <option value="company_Ambassador">Ambassador</option>
+                <option value="company_Ashok">Ashok</option>
+                <option value="company_Audi">Audi</option>
+                <option value="company_BMW">BMW</option>
+                <option value="company_Chevrolet">Chevrolet</option>
+                <option value="company_Daewoo">Daewoo</option>
+                <option value="company_Datsun">Datsun</option>
+                <option value="company_Fiat">Fiat</option>
+                <option value="company_Force">Force</option>
+                <option value="company_Ford">Ford</option>
+                <option value="company_Honda">Honda</option>
+                <option value="company_Hyundai">Hyundai</option>
+                <option value="company_Isuzu">Isuzu</option>
+                <option value="company_Jaguar">Jaguar</option>
+                <option value="company_Jeep">Jeep</option>
+                <option value="company_Kia">Kia</option>
+                <option value="company_Land">Land</option>
+                <option value="company_Lexus">Lexus</option>
+                <option value="company_MG">MG</option>
+                <option value="company_Mahindra">Mahindra</option>
+                <option value="company_Maruti">Maruti</option>
+                <option value="company_Mercedes_Benz">Mercedes-Benz</option>
+                <option value="company_Mitsubishi">Mitsubishi</option>
+                <option value="company_Nissan">Nissan</option>
+                <option value="company_Opel">Opel</option>
+                <option value="company_Renault">Renault</option>
+                <option value="company_Skoda">Skoda</option>
+                <option value="company_Tata">Tata</option>
+                <option value="company_Toyota">Toyota</option>
+                <option value="company_Volkswagen">Volkswagen</option>
+                <option value="company_Volvo">Volvo</option>
+            </select>
+
+            <br><br><button id="sub" type="submit ">Predict</button>
+            <br>
+
+        </form>
+        <br><br><h3>{{ prediction_text }}<h3>
+    </div>
+
+    <style>
+        body {
+            background-color: lightslategray;
+            text-align: center;
+            padding: 0px;
+        }
+        
+        #research {
+            font-size: 18px;
+            width: 100px;
+            height: 23px;
+            top: 23px;
+        }
+        
+        #box {
+            border-radius: 60px;
+            border-color: 45px;
+            border-style: solid;
+            font-family: cursive;
+            text-align: center;
+            background-color: rgb(168, 131, 61);
+            font-size: medium;
+            position: absolute;
+            width: 700px;
+            bottom: 9%;
+            height: 850px;
+            right: 30%;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+        }
+        
+        #fuel {
+            width: 83px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #fuel:hover {
+            background-color: coral;
+        }
+        
+        #research {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #research:hover {
+            background-color: coral;
+        }
+        
+        #resea {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #resea:hover {
+            background-color: coral;
+        }
+        
+        #sub {
+            width: 120px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #sub:hover {
+            background-color: darkcyan;
+        }
+        
+        #first {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #second {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #third {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #fourth {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</body>
+
+</html>
